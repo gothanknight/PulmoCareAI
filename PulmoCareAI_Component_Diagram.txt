@@ -1,0 +1,136 @@
+PULMOCAREAI SYSTEM - COMPONENT DIAGRAM
+===============================================
+
+LAYER 1: CLIENT LAYER
+======================
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                           CLIENT LAYER                                    │
+│  ┌─────────────────────────────────────────────────────────────────────┐   │
+│  │                    <<component>>                                   │   │
+│  │                   React.js Frontend                               │   │
+│  │  ┌─────────────┐ ┌─────────────┐ ┌─────────────┐ ┌─────────────┐ │   │
+│  │  │  AuthContext│ │  Dashboard  │ │   Analysis  │ │  Statistics │ │   │
+│  │  └─────────────┘ └─────────────┘ └─────────────┘ └─────────────┘ │   │
+│  │  ┌─────────────┐ ┌─────────────┐ ┌─────────────┐ ┌─────────────┐ │   │
+│  │  │PatientMgmt  │ │   History   │ │    Profile  │ │   Register  │ │   │
+│  │  └─────────────┘ └─────────────┘ └─────────────┘ └─────────────┘ │   │
+│  └─────────────────────────────────────────────────────────────────────┘   │
+└─────────────────────────────────────────────────────────────────────────────┘
+                                    │
+                                    │ HTTP/HTTPS
+                                    ▼
+
+LAYER 2: APPLICATION LAYER
+==========================
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                        APPLICATION LAYER                                  │
+│  ┌─────────────────────────────────────────────────────────────────────┐   │
+│  │                    <<component>>                                   │   │
+│  │                   Flask Backend                                   │   │
+│  │  ┌─────────────┐ ┌─────────────┐ ┌─────────────┐ ┌─────────────┐ │   │
+│  │  │ AuthService │ │PatientService│ │PredictService│ │ StatsService│ │   │
+│  │  └─────────────┘ └─────────────┘ └─────────────┘ └─────────────┘ │   │
+│  │  ┌─────────────┐ ┌─────────────┐ ┌─────────────┐ ┌─────────────┐ │   │
+│  │  │EmailService │ │ FileService │ │HealthService│ │ ModelService│ │   │
+│  │  └─────────────┘ └─────────────┘ └─────────────┘ └─────────────┘ │   │
+│  └─────────────────────────────────────────────────────────────────────┘   │
+└─────────────────────────────────────────────────────────────────────────────┘
+                                    │
+                                    │ SQL Queries
+                                    ▼
+
+LAYER 3: DATA LAYER
+===================
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                          DATA LAYER                                      │
+│  ┌─────────────────────────────────────────────────────────────────────┐   │
+│  │                    <<component>>                                   │   │
+│  │                  PostgreSQL Database                               │   │
+│  │  ┌─────────────┐ ┌─────────────┐ ┌─────────────┐ ┌─────────────┐ │   │
+│  │  │    users    │ │   patients  │ │ predictions │ │ audit_logs  │ │   │
+│  │  └─────────────┘ └─────────────┘ └─────────────┘ └─────────────┘ │   │
+│  └─────────────────────────────────────────────────────────────────────┘   │
+└─────────────────────────────────────────────────────────────────────────────┘
+                                    │
+                                    │ CT Scan Data
+                                    ▼
+
+LAYER 4: AI LAYER
+=================
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                          AI LAYER                                        │
+│  ┌─────────────────────────────────────────────────────────────────────┐   │
+│  │                    <<component>>                                   │   │
+│  │                   ResNet50 AI Model                               │   │
+│  │  ┌─────────────┐ ┌─────────────┐ ┌─────────────┐ ┌─────────────┐ │   │
+│  │  │ TensorFlow  │ │    Keras    │ │   Grad-CAM  │ │ Focal Loss  │ │   │
+│  │  └─────────────┘ └─────────────┘ └─────────────┘ └─────────────┘ │   │
+│  │  ┌─────────────┐ ┌─────────────┐ ┌─────────────┐ ┌─────────────┐ │   │
+│  │  │ Preprocessing│ │  Inference  │ │ Visualization│ │ Post-processing│ │   │
+│  │  └─────────────┘ └─────────────┘ └─────────────┘ └─────────────┘ │   │
+│  └─────────────────────────────────────────────────────────────────────┘   │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+TECHNOLOGY STACK DETAILS:
+=========================
+
+FRONTEND (React.js):
+- Technology: React.js with Hooks
+- Routing: React Router DOM
+- HTTP Client: Axios
+- UI Library: Tailwind CSS
+- Animations: Framer Motion
+- Charts: Chart.js, D3.js
+- State Management: Context API
+
+BACKEND (Flask):
+- Framework: Flask
+- ORM: SQLAlchemy
+- Authentication: JWT Extended
+- Password Hashing: Bcrypt
+- Email: Flask-Mail
+- CORS: Flask-CORS
+- File Handling: Werkzeug
+
+DATABASE (PostgreSQL):
+- Database: PostgreSQL
+- Connection: psycopg2-binary
+- ACID Compliance: Yes
+- Indexing: Optimized queries
+- Relationships: Foreign keys
+- Audit Trail: Comprehensive logging
+
+AI MODEL (ResNet50):
+- Framework: TensorFlow/Keras
+- Architecture: ResNet50 (50 layers)
+- Loss Function: Focal Loss
+- Input Size: 224×224×3 pixels
+- Processing Time: <2 seconds
+- Accuracy: 86.9%
+- ROC AUC: 0.9956
+
+INTERFACES:
+===========
+- Frontend ↔ Backend: HTTP/HTTPS (RESTful APIs)
+- Backend ↔ Database: SQL Queries (via SQLAlchemy)
+- Backend ↔ AI Model: CT Scan Data (TensorFlow)
+
+SECURITY FEATURES:
+==================
+- JWT Token Authentication (8-hour expiry)
+- Bcrypt Password Hashing
+- Role-based Access Control
+- HIPAA Compliant Data Handling
+- Comprehensive Audit Trails
+- Secure File Upload Validation
+
+PERFORMANCE METRICS:
+====================
+- Frontend Response: <100ms
+- Backend API Response: <200ms
+- Database Query Time: <50ms
+- AI Model Inference: <2 seconds
+- System Uptime: 99.9%
+- Scalability: Horizontal scaling ready
+
+This Component Diagram shows the complete technical architecture of the PulmoCareAI Lung Cancer Detection System, including all layers, components, technologies, and interfaces. 

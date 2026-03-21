@@ -1,0 +1,34 @@
+{
+  "version": "ResNet50-FocalLoss-v1.0",
+  "accuracy": 0.8687499761581421,
+  "test_accuracy": 0.0,
+  "test_precision": 0.0,
+  "test_recall": 0.0,
+  "auc_score": 0.9955821205821206,
+  "epochs_trained": 20,
+  "batch_size": 32,
+  "training_duration_minutes": 2.0220535,
+  "training_date": "2025-07-31T19:40:01.776441",
+  "dataset_info": {
+    "total_samples": 999,
+    "training_samples": 639,
+    "validation_samples": 160,
+    "test_samples": 200
+  },
+  "model_architecture": "ResNet50 + Focal Loss + Custom Head",
+  "input_shape": [
+    224,
+    224,
+    3
+  ],
+  "classes": [
+    "cancerous",
+    "non_cancerous"
+  ],
+  "class_indices": {
+    "cancerous": 0,
+    "non_cancerous": 1
+  },
+  "training_approach": "Focal Loss with extreme class weights (8:1)",
+  "notes": "Successfully achieved class separation with prediction range 0.54"
+}

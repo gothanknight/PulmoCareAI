@@ -1,0 +1,66 @@
+# PulmoCareAI Project .gitignore
+
+# Sensitive Information
+.env
+.env.*
+*.pem
+*.key
+SECRET_KEY
+secrets.json
+
+# Large Model Weights & Data
+*.h5
+*.hdf5
+*.keras
+*.pt
+*.pth
+*.onnx
+
+# Python Auto-generated & Virtual Environments
+__pycache__/
+*.py[cod]
+*$py.class
+venv/
+env/
+.venv/
+.pytest_cache/
+.coverage
+htmlcov/
+pip-log.txt
+
+# Node.js Auto-generated
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Build, Cache, & Dependencies
+build/
+dist/
+cache/
+.cache/
+
+# User Data & Uploads (Never commit patient/user data)
+uploads/
+/instance/
+*.sqlite3
+*.db
+
+# OS Generated Files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# IDEs and Editors
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+*.bak
+# Sample lung images (contain embedded git repos)
+sample_lung_images/

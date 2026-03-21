@@ -1,0 +1,111 @@
+version: '3.8'
+
+services:
+  # PostgreSQL Database
+  database:
+    image: postgres:13
+    container_name: pulmocare_db
+    environment:
+      POSTGRES_DB: pulmocare_db
+      POSTGRES_USER: pulmocare_user
+      POSTGRES_PASSWORD: pulmocare_password
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    ports:
+      - "5432:5432"
+    networks:
+      - pulmocare_network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U pulmocare_user -d pulmocare_db"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # PgAdmin for database management
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    container_name: pulmocare_pgadmin
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@pulmocare.ai
+      PGADMIN_DEFAULT_PASSWORD: admin123
+      PGADMIN_CONFIG_SERVER_MODE: 'False'
+    volumes:
+      - pgadmin_data:/var/lib/pgadmin
+    ports:
+      - "8080:80"
+    networks:
+      - pulmocare_network
+    depends_on:
+      - database
+
+  # Redis for caching (optional)
+  redis:
+    image: redis:7-alpine
+    container_name: pulmocare_redis
+    ports:
+      - "6379:6379"
+    networks:
+      - pulmocare_network
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # PulmoCareAI Application
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: pulmocare_app
+    environment:
+      - DATABASE_URL=postgresql://pulmocare_user:pulmocare_password@database:5432/pulmocare_db
+      - FLASK_ENV=production
+      - SECRET_KEY=your-production-secret-key-change-this
+      - REDIS_URL=redis://redis:6379/0
+    volumes:
+      - ./uploads:/app/uploads
+      - ./PulmoCareAI Deep Learning Project:/app/PulmoCareAI Deep Learning Project
+    ports:
+      - "5000:5000"
+    networks:
+      - pulmocare_network
+    depends_on:
+      database:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:5000/api/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+  # Nginx reverse proxy (optional, for production)
+  nginx:
+    image: nginx:alpine
+    container_name: pulmocare_nginx
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./ssl:/etc/nginx/ssl:ro
+    networks:
+      - pulmocare_network
+    depends_on:
+      - app
+    profiles:
+      - production
+
+volumes:
+  postgres_data:
+    driver: local
+  pgadmin_data:
+    driver: local
+
+networks:
+  pulmocare_network:
+    driver: bridge

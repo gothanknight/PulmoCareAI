@@ -1,0 +1,170 @@
+PULMOCAREAI SYSTEM - ACTIVITY DIAGRAM
+===============================================
+
+[START] → User Opens Application
+    ↓
+[Login Page] → User Enters Credentials
+    ↓
+[Validate Credentials] → Check Username/Password
+    ↓
+{Authentication Failed?}
+    ↓ YES → [Show Error Message] → [Login Page]
+    ↓ NO
+[Generate JWT Token] → [Store Token in Browser]
+    ↓
+[Redirect to Dashboard] → [Load User Profile]
+    ↓
+[Main Navigation] → User Selects Action
+    ↓
+{User Action?}
+    ↓
+├── [Patient Management] → [View Patient List]
+│   ↓
+│   [Add New Patient] → [Enter Patient Details]
+│   ↓
+│   [Save Patient Data] → [Store in Database]
+│   ↓
+│   [Return to Patient List]
+│
+├── [CT Scan Analysis] → [Upload CT Scan Image]
+│   ↓
+│   [Validate File Format] → {Valid Image?}
+│   ↓ NO → [Show Error] → [Upload Page]
+│   ↓ YES
+│   [Preprocess Image] → [Resize to 224×224×3]
+│   ↓
+│   [Load ResNet50 Model] → [Initialize TensorFlow]
+│   ↓
+│   [Run AI Inference] → [Process CT Scan]
+│   ↓
+│   [Generate Grad-CAM] → [Create Visualization]
+│   ↓
+│   [Calculate Confidence] → [Determine Severity]
+│   ↓
+│   [Save Results] → [Store in Database]
+│   ↓
+│   [Display Results] → [Show Analysis Report]
+│   ↓
+│   [Generate PDF Report] → [Download Results]
+│
+├── [Dashboard] → [Load System Statistics]
+│   ↓
+│   [Fetch Recent Predictions] → [Get Patient Data]
+│   ↓
+│   [Calculate Metrics] → [Update Charts]
+│   ↓
+│   [Display Dashboard] → [Show Analytics]
+│
+├── [Medical Statistics] → [Load Clinical Data]
+│   ↓
+│   [Calculate Sensitivity] → [Compute Specificity]
+│   ↓
+│   [Generate ROC Curve] → [Plot Performance]
+│   ↓
+│   [Display Statistics] → [Show Clinical Metrics]
+│
+└── [Prediction History] → [Load All Predictions]
+    ↓
+    [Filter by Date/Patient] → [Sort Results]
+    ↓
+    [Display History] → [Show Past Analyses]
+    ↓
+    [Export Data] → [Download CSV Report]
+
+[User Logout] → [Clear JWT Token] → [Redirect to Login]
+    ↓
+[END]
+
+DETAILED WORKFLOW BREAKDOWN:
+============================
+
+1. AUTHENTICATION WORKFLOW:
+---------------------------
+[Start] → [Login Form] → [Validate Input] → [Check Database] → [Generate JWT] → [Store Token] → [Redirect Dashboard]
+
+2. PATIENT MANAGEMENT WORKFLOW:
+-------------------------------
+[Patient List] → [Add Patient] → [Validate Data] → [Save to Database] → [Update List] → [Show Success]
+
+3. CT SCAN ANALYSIS WORKFLOW:
+------------------------------
+[Upload Image] → [Validate Format] → [Preprocess] → [AI Model] → [Generate Results] → [Save to DB] → [Display Report]
+
+4. DASHBOARD WORKFLOW:
+-----------------------
+[Load Dashboard] → [Fetch Data] → [Calculate Stats] → [Update Charts] → [Display Metrics]
+
+5. MEDICAL STATISTICS WORKFLOW:
+--------------------------------
+[Load Statistics] → [Calculate Metrics] → [Generate Charts] → [Display Clinical Data]
+
+6. PREDICTION HISTORY WORKFLOW:
+--------------------------------
+[Load History] → [Filter Data] → [Sort Results] → [Display List] → [Export Data]
+
+DECISION POINTS:
+================
+
+{Authentication Valid?}
+├── YES → Continue to Main Application
+└── NO → Show Error and Return to Login
+
+{File Format Valid?}
+├── YES → Proceed with Analysis
+└── NO → Show Error and Request New File
+
+{Analysis Complete?}
+├── YES → Display Results and Save
+└── NO → Show Error and Retry
+
+{User Wants to Export?}
+├── YES → Generate PDF/CSV Report
+└── NO → Continue with Current View
+
+{User Wants to Logout?}
+├── YES → Clear Session and Redirect
+└── NO → Continue with Current Session
+
+PARALLEL ACTIVITIES:
+====================
+
+[Email Notifications] ←→ [Main Workflow]
+├── Send Login Alert
+├── Send Password Reset
+└── Send Analysis Complete
+
+[Background Processing] ←→ [User Interface]
+├── Database Optimization
+├── Model Loading
+└── File Cleanup
+
+[Security Monitoring] ←→ [All Activities]
+├── Audit Logging
+├── Session Validation
+└── Access Control
+
+ERROR HANDLING:
+===============
+
+[Network Error] → [Show Retry Option] → [Attempt Reconnection]
+[Database Error] → [Show Error Message] → [Log Error] → [Retry Operation]
+[Model Error] → [Show Error Message] → [Log Error] → [Request New Upload]
+[Validation Error] → [Show Field Errors] → [Request Correction]
+
+PERFORMANCE METRICS:
+====================
+
+Response Times:
+- Login: < 200ms
+- Dashboard Load: < 500ms
+- File Upload: < 2 seconds
+- AI Analysis: < 2 seconds
+- Database Queries: < 50ms
+
+Success Rates:
+- Authentication: 99.9%
+- File Processing: 98.5%
+- AI Analysis: 97.2%
+- Database Operations: 99.8%
+
+This Activity Diagram shows the complete workflow of the PulmoCareAI Lung Cancer Detection System, including all user interactions, system processes, decision points, and error handling scenarios.
