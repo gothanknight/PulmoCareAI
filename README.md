@@ -88,6 +88,6 @@ To minimize dependency friction, environment setup and secret generation have be
 ## Author
 
 **Nisarg Trivedi**  
-B.Tech CSE, Silver Oak University, Gujarat, India  
-- [GitHub](#) <!-- Add your GitHub link here -->
-- [LinkedIn](#) <!-- Add your LinkedIn link here -->
+B.Tech CSE, Aditya Silver Oak University, Ahmedabad, Gujarat, India  
+- [GitHub] (https://github.com/gothanknight)
+- [LinkedIn] (https://www.linkedin.com/in/nisarg-trivedi-654945279/)
