@@ -64,7 +64,6 @@ A React single-page application focused on data visualization and clinical usabi
 - **Backend API**: Python, Flask, SQLAlchemy, JWT, PostgreSQL
 - **Frontend**: React.js, Axios, TailwindCSS, Chart.js, D3.js
 - **Environment Automation**: Custom Python setup routines (`run_setup.py`, `generate_secrets.py`)
-- **Deployment**: Docker, Docker Compose, Nginx (`Dockerfile`, `docker-compose.yml`, `nginx.conf`) — *Note: Containerized deployment configuration is currently planned/in progress and pending comprehensive testing.*
 
 ## Getting Started
 
