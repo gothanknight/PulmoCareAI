@@ -2,6 +2,9 @@
 ## 🎥 Demo Video
 👉 [Watch Demo](https://drive.google.com/file/d/1fzk92wdBbh9zXxvWTbXojfe-cvwfgKDl/preview)
 
+🚀 Full Project Breakdown → Notion Wiki
+https://pewter-soup-9ff.notion.site/354ac65f058880e4bda7ce62baec4626?v=354ac65f0588806d848d000c347bc016&source=copy_link
+
 ![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white) ![Flask](https://img.shields.io/badge/Flask-000000?style=for-the-badge&logo=flask&logoColor=white) ![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB) ![TensorFlow](https://img.shields.io/badge/TensorFlow-FF6F00?style=for-the-badge&logo=tensorflow&logoColor=white) ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-316192?style=for-the-badge&logo=postgresql&logoColor=white)
 
 **What does this system do?**  
